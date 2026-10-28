@@ -1,0 +1,295 @@
+/* ============================================================
+   CADERNO DE DRINKS — estilos
+   Paleta inspirada em bar de madeira escura + rótulo de destilado:
+   fundo café torrado, texto creme, destaque âmbar (cor de uísque).
+   ============================================================ */
+
+:root {
+  --bg: #17130f;          /* fundo — madeira/café torrado */
+  --bg-carta: #211b15;    /* fundo dos cartões de resultado */
+  --bg-input: #1d1712;
+  --texto: #f1e9d8;       /* creme, tipo etiqueta antiga */
+  --texto-fraco: #a89a82; /* texto secundário */
+  --ambar: #c9932c;       /* destaque principal — cor de destilado */
+  --ambar-forte: #e0ac3f;
+  --cobre: #7a3b2e;       /* acento secundário, usar pouco */
+  --linha: #3a3024;       /* bordas / divisórias */
+  --erro: #b85c4a;
+
+  --fonte-titulo: 'Fraunces', serif;
+  --fonte-mono: 'IBM Plex Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: var(--fonte-mono);
+  line-height: 1.5;
+  /* textura bem sutil pra não ficar um fundo chapado */
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(201, 147, 44, 0.04), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(122, 59, 46, 0.06), transparent 45%);
+}
+
+.capa {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+.cabecalho {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--linha);
+  padding-bottom: 32px;
+}
+
+.selo {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ambar);
+  margin: 0 0 12px;
+}
+
+.titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: clamp(36px, 6vw, 52px);
+  margin: 0 0 8px;
+  color: var(--texto);
+  letter-spacing: -0.01em;
+}
+
+.subtitulo {
+  color: var(--texto-fraco);
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ---------- Busca ---------- */
+
+.busca {
+  margin-bottom: 32px;
+}
+
+.campo-busca {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--linha);
+  color: var(--texto);
+  font-family: var(--fonte-mono);
+  font-size: 16px;
+  padding: 16px 18px;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.campo-busca::placeholder {
+  color: var(--texto-fraco);
+  opacity: 0.6;
+}
+
+.campo-busca:focus {
+  border-color: var(--ambar);
+  box-shadow: 0 0 0 3px rgba(201, 147, 44, 0.15);
+}
+
+.dica-busca {
+  font-size: 12px;
+  color: var(--texto-fraco);
+  margin: 8px 4px 0;
+}
+
+.dica-busca.aviso {
+  color: var(--erro);
+}
+
+/* ---------- Resultados ---------- */
+
+.resultados {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mensagem-vazia {
+  text-align: center;
+  color: var(--texto-fraco);
+  padding: 40px 20px;
+  font-size: 14px;
+  border: 1px dashed var(--linha);
+  border-radius: 6px;
+}
+
+/* Cada resultado é desenhado como uma "ficha" de bar:
+   topo denteado (via clip-path) lembrando uma nota/comanda arrancada. */
+.carta {
+  background: var(--bg-carta);
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  padding: 22px 22px 20px;
+  position: relative;
+  border-top: 2px solid var(--ambar);
+}
+
+.carta-tipo {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ambar);
+  margin: 0 0 6px;
+}
+
+.carta-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--texto);
+}
+
+.carta-categoria {
+  font-size: 12px;
+  color: var(--texto-fraco);
+  margin: 0 0 14px;
+}
+
+.carta-secao-titulo {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-fraco);
+  margin: 14px 0 8px;
+}
+
+.lista-ingredientes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lista-ingredientes li {
+  font-size: 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--linha);
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--texto);
+}
+
+/* ingrediente que bateu com a busca fica destacado na "pílula" */
+.lista-ingredientes li.combina {
+  border-color: var(--ambar);
+  color: var(--ambar-forte);
+}
+
+.carta-modo-preparo {
+  font-size: 13px;
+  color: var(--texto);
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* Cartão usado quando a busca é por INGREDIENTE:
+   mostra "onde esse ingrediente aparece" em vez da ficha completa */
+.lista-onde-usa {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lista-onde-usa li {
+  font-size: 13px;
+  padding: 8px 10px;
+  background: var(--bg-input);
+  border-radius: 4px;
+  border: 1px solid var(--linha);
+}
+
+.lista-onde-usa li strong {
+  color: var(--ambar-forte);
+}
+
+/* ---------- Cantinho de anotações ---------- */
+
+.anotacoes {
+  margin-top: 40px;
+  border-top: 1px solid var(--linha);
+  padding-top: 28px;
+}
+
+.anotacoes-titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--texto);
+}
+
+.caixa-anotacoes {
+  width: 100%;
+  min-height: 140px;
+  background: var(--bg-input);
+  border: 1px solid var(--linha);
+  color: var(--texto);
+  font-family: var(--fonte-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 14px 16px;
+  border-radius: 4px;
+  outline: none;
+  resize: vertical; /* deixa a pessoa "puxar" só a altura, não a largura */
+  transition: border-color 0.15s ease;
+}
+
+.caixa-anotacoes::placeholder {
+  color: var(--texto-fraco);
+  opacity: 0.6;
+}
+
+.caixa-anotacoes:focus {
+  border-color: var(--ambar);
+  box-shadow: 0 0 0 3px rgba(201, 147, 44, 0.15);
+}
+
+.anotacoes-dica {
+  font-size: 11px;
+  color: var(--texto-fraco);
+  margin: 8px 4px 0;
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  margin-top: 48px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--texto-fraco);
+}
+
+.rodape span {
+  color: var(--ambar);
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 480px) {
+  .capa {
+    padding: 32px 16px 60px;
+  }
+}

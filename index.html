@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caderno de Drinks</title>
+
+  <!-- Fontes: uma serifada pra "assinatura" do caderno + uma monoespaçada pra ficha de ingredientes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- index.html está na RAIZ do projeto, então css e js são pastas irmãs (sem ../) -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="capa">
+    <header class="cabecalho">
+      <p class="selo">carta de coquetéis · uso pessoal</p>
+      <h1 class="titulo">Caderno de Drinks</h1>
+      <p class="subtitulo">Pesquise por um drink ou por um ingrediente</p>
+    </header>
+
+    <!-- Barra de busca -->
+    <section class="busca">
+      <input
+        type="text"
+        id="campo-busca"
+        class="campo-busca"
+        placeholder="ex: gin, caipirinha, limão..."
+        autocomplete="off"
+      >
+      <p class="dica-busca" id="dica-busca">
+        Digite pelo menos 2 letras para começar a pesquisar
+      </p>
+    </section>
+
+    <!-- É AQUI que os resultados da busca são desenhados pelo JS (ver script.js -> renderizarResultados) -->
+    <section class="resultados" id="resultados"></section>
+
+    <!--
+      CANTINHO DE ANOTAÇÕES
+      Uma textarea é como um <input>, mas aceita várias linhas —
+      por isso é o elemento certo pra uma lista/bloco de texto livre.
+      O "id" abaixo é o gancho que o script.js usa pra achar esse
+      elemento e ler/escrever o valor dele.
+    -->
+    <section class="anotacoes">
+      <h2 class="anotacoes-titulo">Fila de drinks pra fazer</h2>
+      <textarea
+        id="caixa-anotacoes"
+        class="caixa-anotacoes"
+        placeholder="Ex: Testar Negroni com laranja bahia, comprar angostura..."
+      ></textarea>
+      <p class="anotacoes-dica">Salva sozinho neste navegador enquanto você digita.</p>
+    </section>
+
+    <footer class="rodape">
+      <p>
+        <span id="contador-drinks">0</span> drinks cadastrados no caderno ·
+        Fichas viram cartão quando você acha algo
+      </p>
+    </footer>
+  </div>
+
+  <!--
+    ORDEM DOS SCRIPTS IMPORTA:
+    1) data.js  -> só define a lista de drinks (as "cartas")
+    2) script.js -> usa essa lista pra fazer a busca e desenhar a tela
+  -->
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
