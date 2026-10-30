@@ -87,13 +87,13 @@ function criarCartaDeDrink(drink, termoBuscado) {
   carta.innerHTML = `
     <p class="carta-tipo">Drink encontrado</p>
     <h2 class="carta-titulo">${drink.nome}</h2>
-    <p class="carta-categoria">${drink.categoria}</p>
+    <p class="carta-categoria">${drink.categoria}${drink.preco ? " · " + drink.preco : ""}</p>
 
     <p class="carta-secao-titulo">Ingredientes</p>
     <ul class="lista-ingredientes">${listaIngredientesHTML}</ul>
 
     <p class="carta-secao-titulo">Modo de preparo</p>
-    <p class="carta-modo-preparo">${drink.modoPreparo}</p>
+    <p class="carta-modo-preparo">${drink.modoPreparo || "Ainda não anotado — preencha o campo modoPreparo no data.js."}</p>
   `;
 
   return carta;
@@ -108,7 +108,7 @@ function criarCartaDeIngrediente(grupo) {
   carta.className = "carta";
 
   const listaDrinksHTML = grupo.drinks
-    .map((drink) => `<li><strong>${drink.nome}</strong> — ${drink.categoria}</li>`)
+    .map((drink) => `<li><strong>${drink.nome}</strong> — ${drink.categoria}${drink.preco ? " · " + drink.preco : ""}</li>`)
     .join("");
 
   carta.innerHTML = `
